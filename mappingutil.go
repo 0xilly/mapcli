@@ -71,7 +71,7 @@ func getMethod(method string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s -> %s\n", method, m[method])
+	fmt.Printf("%s\n", m[method])
 }
 
 func getFeild(field string) {
@@ -94,7 +94,7 @@ func getFeild(field string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s -> %s\n", field, m[field])
+	fmt.Printf("%s\n", m[field])
 }
 
 func GetMapping(srg string) {
