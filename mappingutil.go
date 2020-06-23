@@ -93,8 +93,31 @@ func getFeild(field string) {
 		fmt.Println("No mapping found")
 		os.Exit(1)
 	}
-
 	fmt.Printf("%s\n", m[field])
+
+}
+
+func getParams(field string) {
+	file, err := os.Open(getMapDir() + "/params.csv")
+	m := make(map[string]string)
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+	scan := bufio.NewScanner(file)
+	for scan.Scan() {
+		spl := strings.Split(scan.Text(), ",")
+		m[spl[0]] = spl[1]
+	}
+
+	if _, ok := m[field]; !ok {
+		fmt.Println("No mapping found")
+		os.Exit(1)
+	}
+	fmt.Printf("%s\n", m[field])
+
 }
 
 func GetMapping(srg string) {
@@ -103,6 +126,8 @@ func GetMapping(srg string) {
 		getMethod(srg)
 	} else if strings.Contains(srg, "field_") {
 		getFeild(srg)
+	} else if strings.Contains(srg, "p_") {
+		getParams(srg)
 	} else {
 		fmt.Println("Unsupported Mapping")
 	}
